@@ -472,6 +472,12 @@ module PhusionPassenger
     end
     memoize :cxx_11_flag, true
 
+    def self.has_dl_library?
+      return try_link("Checking for -ldl support",
+        :c, "int main() { return 0; }\n", '-ldl')
+    end
+    memoize :has_dl_library?, true
+
     def self.has_rt_library?
       return try_link("Checking for -lrt support",
         :c, "int main() { return 0; }\n", '-lrt')
